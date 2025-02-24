@@ -1,113 +1,66 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
- // Rigidbody of the player.
- private Rigidbody rb; 
+    private Rigidbody rb;
+    private int count;
+    private float movementX;
+    private float movementY;
+    public float speed = 0;
+    public TextMeshProUGUI countText;
 
- // Variable to keep track of collected "PickUp" objects.
- private int count;
-
- // Movement along X and Y axes.
- private float movementX;
- private float movementY;
-
- // Speed at which the player moves.
- public float speed = 0;
-
- // UI text component to display count of "PickUp" objects collected.
- public TextMeshProUGUI countText;
-
- // UI object to display winning text.
- public GameObject winTextObject;
-
- // Start is called before the first frame update.
- void Start()
+    void Start()
     {
- // Get and store the Rigidbody component attached to the player.
         rb = GetComponent<Rigidbody>();
-
- // Initialize count to zero.
         count = 0;
-
- // Update the count display.
         SetCountText();
-
- // Initially set the win text to be inactive.
-        winTextObject.SetActive(false);
     }
- 
- // This function is called when a move input is detected.
- void OnMove(InputValue movementValue)
+
+    void OnMove(InputValue movementValue)
     {
- // Convert the input value into a Vector2 for movement.
         Vector2 movementVector = movementValue.Get<Vector2>();
-
- // Store the X and Y components of the movement.
-        movementX = movementVector.x; 
-        movementY = movementVector.y; 
+        movementX = movementVector.x;
+        movementY = movementVector.y;
     }
 
- // FixedUpdate is called once per fixed frame-rate frame.
- private void FixedUpdate() 
+    private void FixedUpdate()
     {
- // Create a 3D movement vector using the X and Y inputs.
-        Vector3 movement = new Vector3 (movementX, 0.0f, movementY);
-
- // Apply force to the Rigidbody to move the player.
-        rb.AddForce(movement * speed); 
+        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        rb.AddForce(movement * speed);
     }
 
- 
- void OnTriggerEnter(Collider other) 
+    void OnTriggerEnter(Collider other)
     {
- // Check if the object the player collided with has the "PickUp" tag.
- if (other.gameObject.CompareTag("PickUp")) 
+        if (other.gameObject.CompareTag("PickUp"))
         {
- // Deactivate the collided object (making it disappear).
             other.gameObject.SetActive(false);
-
- // Increment the count of "PickUp" objects collected.
             count = count + 1;
-
- // Update the count display.
             SetCountText();
         }
     }
 
- // Function to update the displayed count of "PickUp" objects collected.
- void SetCountText() 
+    void SetCountText()
     {
- // Update the count text with the current count.
-        countText.text = "Count: " + count.ToString();
+        countText.text = "Score: " + count.ToString();
+    }
 
- // Check if the count has reached or exceeded the win condition.
- if (count >= 12)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
         {
- // Display the win text.
-            winTextObject.SetActive(true);
-
- // Destroy the enemy GameObject.
-            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            Destroy(gameObject);
+            countText.text = "You Lose!";
         }
     }
 
-private void OnCollisionEnter(Collision collision)
-{
- if (collision.gameObject.CompareTag("Enemy"))
+    void Update()
     {
- // Destroy the current object
-        Destroy(gameObject); 
- 
- // Update the winText to display "You Lose!"
-        winTextObject.gameObject.SetActive(true);
-        winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
- 
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
-
-}
-
-
 }

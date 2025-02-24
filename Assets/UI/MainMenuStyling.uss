@@ -1,0 +1,163 @@
+.nav-container {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    max-width: none;
+    min-width: auto;
+    min-height: auto;
+    align-items: flex-start;
+    padding-left: 69px;
+    padding-top: 69px;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    flex-shrink: 1;
+    flex-grow: 0;
+    flex-basis: auto;
+}
+
+.nav-primary {
+    justify-content: space-between;
+    width: auto;
+    max-width: none;
+    min-width: auto;
+    flex-direction: row;
+    margin-right: 0;
+}
+
+.nav-secondary {
+    justify-content: space-between;
+    width: auto;
+    max-width: none;
+    min-width: auto;
+    flex-direction: row;
+}
+
+.nav-gamemode {
+    justify-content: space-between;
+    width: auto;
+    max-width: none;
+    min-width: auto;
+    flex-direction: row;
+    margin-top: 35px;
+}
+
+.btn-menu {
+    width: auto;
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    cursor: initial;
+    height: auto;
+    font-size: 32px;
+    -unity-font-definition: url("project://database/Assets/Fonts/Lexend/Lexend-SemiBold.ttf?fileID=12800000&guid=1c5cd0e1c01c9ed4cb5bb42d113a20b0&type=3#Lexend-SemiBold");
+    -unity-font-style: normal;
+    text-overflow: ellipsis;
+    color: rgb(255, 255, 255);
+    max-height: none;
+    min-height: auto;
+    opacity: 1;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    position: relative;
+    top: auto;
+    left: auto;
+    display: flex;
+    visibility: visible;
+    overflow: visible;
+    padding-right: 0;
+    padding-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.51);
+    -unity-text-outline-width: 0;
+    letter-spacing: 5px;
+    -unity-text-align: upper-left;
+    justify-content: flex-start;
+    margin-right: 40px;
+    margin-top: 0;
+    transition-duration: 222ms;
+    transition-timing-function: ease;
+}
+
+.btn-menu:hover {
+    text-shadow: 0 0 2px rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+.text-lg {
+    font-size: 48px;
+}
+
+.text-opacity {
+    color: rgba(240, 240, 240, 0.78);
+}
+
+.text-glow-white {
+    text-shadow: 0 0 2px rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+.btn-gamemode {
+    width: auto;
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    cursor: initial;
+    height: auto;
+    font-size: 32px;
+    -unity-font-definition: url("project://database/Assets/Fonts/Lexend/Lexend-SemiBold.ttf?fileID=12800000&guid=1c5cd0e1c01c9ed4cb5bb42d113a20b0&type=3#Lexend-SemiBold");
+    -unity-font-style: normal;
+    text-overflow: ellipsis;
+    color: rgb(255, 255, 255);
+    max-height: none;
+    min-height: auto;
+    opacity: 1;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    position: relative;
+    top: auto;
+    left: auto;
+    display: flex;
+    visibility: visible;
+    overflow: visible;
+    -unity-text-outline-width: 0;
+    letter-spacing: 5px;
+    -unity-text-align: upper-left;
+    justify-content: flex-start;
+    transition-duration: 222ms;
+    transition-timing-function: ease;
+    margin-left: 0;
+    padding-left: 14px;
+    padding-top: 8px;
+    padding-right: 14px;
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.card-gamemode {
+    background-color: rgba(150, 150, 150, 0.31);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    align-content: auto;
+    justify-content: space-between;
+    align-items: auto;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-right: 40px;
+}

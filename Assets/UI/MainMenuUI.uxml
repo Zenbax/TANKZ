@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainMenuStyling.uss?fileID=7433441132597879392&amp;guid=b930dcf937e5b7b43937b43f93588fec&amp;type=3#MainMenuStyling" />
+    <ui:VisualElement name="NavigationMenu" view-data-key="navigation-menu" class="navigation-bar nav-bar nav-container">
+        <ui:VisualElement name="PrimaryNav" view-data-key="primary-nav" class="primary-navigation primary-nav big-menu-btn nav-primary">
+            <ui:Button text="OPERATIONS" name="Btn_OPERATIONS" enabled="true" view-data-key="operations-btn" parse-escape-sequences="false" emoji-fallback-support="false" selectable="false" class="menu-btn primary-menu-btn big-menu-btn text-48 h1 btn-menu text-lg text-glow-white" />
+            <ui:Button text="WORKSHOP" double-click-selects-word="false" name="Btn_WORKSHOP" enabled="true" view-data-key="workshop-btn" parse-escape-sequences="true" emoji-fallback-support="false" selectable="true" class="menu-btn primary-menu-btn big-menu-btn text-48 h1 btn-menu text-lg text-opacity" />
+        </ui:VisualElement>
+        <ui:VisualElement name="SecondaryNav" view-data-key="secondary-nav" class="secondary-nav nav-secondary">
+            <ui:Button text="COMPETITIVE" double-click-selects-word="false" name="Btn_COMPETITIVE" enabled="true" view-data-key="competitive-btn" parse-escape-sequences="true" emoji-fallback-support="false" selectable="true" class="menu-btn secondary-menu-btn btn-menu" />
+            <ui:Button text="BATTLE ROYALE" double-click-selects-word="false" name="Btn_BATTLE_ROYALE" enabled="true" view-data-key="battle-royale-btn" parse-escape-sequences="true" emoji-fallback-support="false" selectable="true" class="menu-btn secondary-menu-btn btn-menu" />
+            <ui:Button text="ARCADE" double-click-selects-word="false" name="Btn_ARCADE" enabled="true" view-data-key="arcade-btn" parse-escape-sequences="true" emoji-fallback-support="false" selectable="true" class="menu-btn secondary-menu-btn btn-menu" />
+            <ui:Button text="TUTORIAL" double-click-selects-word="false" name="Btn_TUTORIAL" enabled="true" view-data-key="tutorial-btn" parse-escape-sequences="true" emoji-fallback-support="false" selectable="true" class="menu-btn secondary-menu-btn btn-menu" />
+        </ui:VisualElement>
+        <ui:VisualElement name="GamemodeNav" view-data-key="gamemode-nav" enabled="true" class="nav-gamemode" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="Card_CHAMPIONSHIP" class="card-gamemode">
+                <ui:Button text="CHAMPIONSHIP" double-click-selects-word="false" name="Btn_CHAMPIONSHIP" enabled="true" view-data-key="championship-btn" parse-escape-sequences="true" emoji-fallback-support="false" selectable="true" class="btn-gamemode" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Card_DEATHMATCH" class="card-gamemode">
+                <ui:Button text="DEATHMATCH" double-click-selects-word="false" name="Btn_DEATHMATCH" enabled="true" view-data-key="deathmatch-btn" parse-escape-sequences="true" emoji-fallback-support="false" selectable="true" class="btn-gamemode" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Card_TEST" class="card-gamemode">
+                <ui:Button text="TEST" double-click-selects-word="false" name="Btn_TEST" enabled="true" view-data-key="test-btn" parse-escape-sequences="true" emoji-fallback-support="false" selectable="true" class="btn-gamemode" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
