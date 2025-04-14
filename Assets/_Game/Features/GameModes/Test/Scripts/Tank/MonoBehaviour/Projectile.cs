@@ -28,11 +28,16 @@ public class Projectile : MonoBehaviour, IProjectile
 
     void OnCollisionEnter(Collision collision)
     {
-        // Handle bouncing (PhysicsMaterial handles the bounce itself)
+        // Handle bouncing
         if (collision.gameObject.CompareTag("Wall"))
         {
-            // Ensure the projectile maintains its speed after bouncing
-            rb.linearVelocity = rb.linearVelocity.normalized * speed;
+            // Calculate the reflection vector
+            Vector3 incomingVelocity = rb.linearVelocity;
+            Vector3 normal = collision.contacts[0].normal; // Get the collision normal
+            Vector3 reflectedVelocity = Vector3.Reflect(incomingVelocity, normal);
+
+            // Apply the reflected velocity while maintaining the speed
+            rb.linearVelocity = reflectedVelocity.normalized * speed;
             return;
         }
 
