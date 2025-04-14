@@ -52,9 +52,24 @@ public class Fire : MonoBehaviour
         projectile.SetActive(true);
 
         IProjectile projectileScript = projectileScripts[projectile];
-        projectileScript.Launch(projectileData, firingPoint.forward);
+        projectileScript.Launch(projectileData, firingPoint.forward, new Collider() { });
+
+        // Ignore collision with the tank that fired the projectile
+        Collider tankCollider = GetComponent<Collider>();
+        Collider projectileCollider = projectile.GetComponent<Collider>();
+        Physics.IgnoreCollision(projectileCollider, tankCollider, true);
+
+        // Start coroutine to re-enable collision after exiting the tank's collider
+        StartCoroutine(ReenableCollision(projectileCollider, tankCollider));
 
         StartCoroutine(ReturnToPool(projectile, projectileData.lifetime));
+    }
+
+    private IEnumerator ReenableCollision(Collider projectileCollider, Collider tankCollider)
+    {
+        // Wait until the projectile exits the tank's collider
+        yield return new WaitUntil(() => !projectileCollider.bounds.Intersects(tankCollider.bounds));
+        Physics.IgnoreCollision(projectileCollider, tankCollider, false);
     }
 
     private IEnumerator ReturnToPool(GameObject projectile, float delay)
