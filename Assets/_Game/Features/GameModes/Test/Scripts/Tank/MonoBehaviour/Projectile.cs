@@ -28,19 +28,6 @@ public class Projectile : MonoBehaviour, IProjectile
 
     void OnCollisionEnter(Collision collision)
     {
-        // Handle bouncing
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            // Calculate the reflection vector
-            Vector3 incomingVelocity = rb.linearVelocity;
-            Vector3 normal = collision.contacts[0].normal; // Get the collision normal
-            Vector3 reflectedVelocity = Vector3.Reflect(incomingVelocity, normal);
-
-            // Apply the reflected velocity while maintaining the speed
-            rb.linearVelocity = reflectedVelocity.normalized * speed;
-            return;
-        }
-
         // Handle damage logic
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
         if (damageable != null)
@@ -50,6 +37,26 @@ public class Projectile : MonoBehaviour, IProjectile
             {
                 damageable.TakeDamage(damage);
             }
+        }
+
+        // Ignore physics interaction with the tank
+        if (collision.collider == shooterCollider)
+        {
+            // Prevent physical impact
+            rb.isKinematic = true;
+            return;
+        }
+
+        // Handle bouncing
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Vector3 incomingVelocity = rb.linearVelocity;
+            Vector3 normal = collision.contacts[0].normal;
+            Vector3 reflectedVelocity = Vector3.Reflect(incomingVelocity, normal);
+
+            // Apply the reflected velocity while maintaining the speed
+            rb.linearVelocity = reflectedVelocity.normalized * speed;
+            return;
         }
 
         if (explosive)
