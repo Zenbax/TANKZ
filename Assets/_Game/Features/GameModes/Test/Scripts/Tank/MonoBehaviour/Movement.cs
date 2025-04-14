@@ -15,13 +15,13 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        // Move forward and backward
+        // Move forward and backward    // Move forward and backward (still smooth)
         float move = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         Vector3 movement = transform.forward * move;
         rb.MovePosition(rb.position + movement);
 
-        // Rotate left and right
-        float rotate = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
+        // Rotate left/right — raw input cancels out if both keys are pressed
+        float rotate = Input.GetAxisRaw("Horizontal") * rotationSpeed * Time.deltaTime;
         Quaternion turn = Quaternion.Euler(0f, rotate, 0f);
         rb.MoveRotation(rb.rotation * turn);
     }
