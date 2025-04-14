@@ -11,4 +11,5 @@
 }
 
 .health-bar {
+    width: 200%;
 }
