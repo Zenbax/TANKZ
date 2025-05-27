@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Game/Features/GameModes/Test/UI/InGameStyling.uss?fileID=7433441132597879392&amp;guid=2a191ad80565a43ab9c614c6ef66a57c&amp;type=3#InGameStyling" />
+    <engine:VisualElement name="Wrapper" style="flex-grow: 1;">
+        <engine:VisualElement name="ScoreContainer" style="flex-grow: 1;" />
+        <engine:VisualElement name="HealthContainer" class="health-container" style="flex-grow: 1;">
+            <engine:ProgressBar value="22" title="my-progress" name="HealthBar" class="health-bar" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

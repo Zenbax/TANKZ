@@ -1,0 +1,15 @@
+.health-container {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: none;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    align-content: center;
+    align-self: flex-start;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.health-bar {
+    width: 200%;
+}
