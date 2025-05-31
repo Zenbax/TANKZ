@@ -54,22 +54,17 @@ public class Fire : MonoBehaviour
         IProjectile projectileScript = projectileScripts[projectile];
         projectileScript.Launch(projectileData, firingPoint.forward, GetComponent<Collider>());
 
-        // Ignore collision with the tank that fired the projectile
-        Collider tankCollider = GetComponent<Collider>();
-        Collider projectileCollider = projectile.GetComponent<Collider>();
-        Physics.IgnoreCollision(projectileCollider, tankCollider, true);
-
-        // Start coroutine to re-enable collision after exiting the tank's collider
-        StartCoroutine(ReenableCollision(projectileCollider, tankCollider));
-
+        // Removed IgnoreCollision entirely
         StartCoroutine(ReturnToPool(projectile, projectileData.lifetime));
     }
 
-    private IEnumerator ReenableCollision(Collider projectileCollider, Collider tankCollider)
+    private IEnumerator ReenableSelfCollision(Collider proj, Collider tank, float delay)
     {
-        // Wait until the projectile exits the tank's collider
-        yield return new WaitUntil(() => !projectileCollider.bounds.Intersects(tankCollider.bounds));
-        Physics.IgnoreCollision(projectileCollider, tankCollider, false);
+        yield return new WaitForSeconds(delay);
+        if (proj != null && tank != null)
+        {
+            Physics.IgnoreCollision(proj, tank, false);
+        }
     }
 
     private IEnumerator ReturnToPool(GameObject projectile, float delay)
@@ -78,7 +73,46 @@ public class Fire : MonoBehaviour
         if (projectile.activeSelf)
         {
             projectile.SetActive(false);
-            projectilePool.Enqueue(projectile);
         }
+        projectilePool.Enqueue(projectile);
+    }
+
+    // Optional: Apply power-up method
+    public void ApplyPowerUp(TurretType newType)
+    {
+        turretType = newType;
+
+        switch (newType)
+        {
+            case TurretType.Standard:
+                projectileData.damage = 50f;
+                projectileData.speed = 10f;
+                projectileData.explosive = false;
+                break;
+            case TurretType.RapidFire:
+                projectileData.damage = 25f;
+                projectileData.speed = 14f;
+                projectileData.explosive = false;
+                break;
+            case TurretType.Sniper:
+                projectileData.damage = 100f;
+                projectileData.speed = 20f;
+                projectileData.explosive = false;
+                break;
+            case TurretType.Explosive:
+                projectileData.damage = 50f;
+                projectileData.speed = 10f;
+                projectileData.explosive = true;
+                break;
+        }
+
+        // Reset after 10 seconds
+        StartCoroutine(RevertToStandard());
+    }
+
+    private IEnumerator RevertToStandard()
+    {
+        yield return new WaitForSeconds(10f);
+        ApplyPowerUp(TurretType.Standard);
     }
 }

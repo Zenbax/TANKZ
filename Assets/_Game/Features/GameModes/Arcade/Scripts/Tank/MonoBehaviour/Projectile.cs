@@ -7,7 +7,9 @@ public class Projectile : MonoBehaviour, IProjectile
     private float speed;
     private bool explosive;
     private Collider shooterCollider;
-    private bool canDamageShooter = false;
+    private Fire shooterFire;
+    private float spawnTime;
+    private bool hasHit = false;
 
     void Awake()
     {
@@ -20,6 +22,9 @@ public class Projectile : MonoBehaviour, IProjectile
         speed = data.speed;
         explosive = data.explosive;
         shooterCollider = shooter;
+        shooterFire = shooter.GetComponent<Fire>();
+        spawnTime = Time.time;
+        hasHit = false;
 
         rb.isKinematic = false;
         rb.linearVelocity = direction * speed;
@@ -27,40 +32,71 @@ public class Projectile : MonoBehaviour, IProjectile
 
     void OnCollisionEnter(Collision collision)
     {
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-        Debug.Log("HIT2");
+        Debug.Log("Has hit: " + hasHit);
+        // if (hasHit) return;
+        hasHit = true;
+
+        GameObject target = collision.gameObject;
+
+        // 🚫 Avoid immediate self-hit (first 0.3s after spawn)
+        if (collision.collider == shooterCollider && Time.time - spawnTime < 0.3f)
+        {
+            hasHit = false;
+            Debug.Log("Has hit 2: " + hasHit);
+            return;
+        }
+
+        Debug.Log("collision.collider: " + collision.collider);
+        Debug.Log("shooterCollider: " + shooterCollider);
+        // ☠️ Self-kill
+        if (collision.collider == shooterCollider && Time.time - spawnTime < 0.3f)
+        {
+            var self = shooterCollider.GetComponent<IDamageable>();
+            self?.TakeDamage(damage);
+            Deactivate();
+            Destroy(shooterCollider.gameObject);
+            return;
+        }
+
+        // 💥 Deal damage
+        IDamageable damageable = target.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            Debug.Log("HIT3");
-            if ((collision.collider == shooterCollider && canDamageShooter) ||
-                collision.collider != shooterCollider)
+            damageable.TakeDamage(damage);
+
+            // Check for powerup
+            if (target.CompareTag("DestructibleWall"))
             {
-                Debug.Log("HIT3");
-                damageable.TakeDamage(damage);
+                foreach (Transform child in target.transform)
+                {
+                    if (child.gameObject.activeSelf)
+                    {
+                        if (child.name == "Sniper") shooterFire?.ApplyPowerUp(TurretType.Sniper);
+                        if (child.name == "RapidFire") shooterFire?.ApplyPowerUp(TurretType.RapidFire);
+                        if (child.name == "Explosive") shooterFire?.ApplyPowerUp(TurretType.Explosive);
+                    }
+                }
+
+                Deactivate();
+                return;
             }
         }
 
-        if (collision.collider == shooterCollider)
+        // Wall bounce
+        if (target.CompareTag("Wall"))
         {
-            rb.isKinematic = true;
-            return;
-        }
-
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            Vector3 incomingVelocity = rb.linearVelocity;
             Vector3 normal = collision.contacts[0].normal;
-            Vector3 reflectedVelocity = Vector3.Reflect(incomingVelocity, normal);
-            rb.linearVelocity = reflectedVelocity.normalized * speed;
-            return;
+            Vector3 reflected = Vector3.Reflect(rb.linearVelocity, normal);
+            rb.linearVelocity = reflected.normalized * speed;
         }
-
-        if (explosive)
+        else
         {
-            Debug.Log("BOOM! Explosive projectile hit: " + collision.gameObject.name);
-            // TODO: Add explosion logic
+            Deactivate();
         }
+    }
 
+    private void Deactivate()
+    {
         gameObject.SetActive(false);
     }
 }
