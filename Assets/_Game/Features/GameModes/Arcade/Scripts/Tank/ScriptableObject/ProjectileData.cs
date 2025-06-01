@@ -8,4 +8,6 @@ public class ProjectileData : ScriptableObject
     public float speed;
     public float lifetime;
     public bool explosive;
+    [Header("Visuals")]
+    public float projectileScale = 0.2f;
 }

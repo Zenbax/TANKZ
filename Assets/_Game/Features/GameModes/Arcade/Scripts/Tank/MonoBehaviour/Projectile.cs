@@ -26,8 +26,13 @@ public class Projectile : MonoBehaviour, IProjectile
         spawnTime = Time.time;
         hasHit = false;
 
+        // Reset physics
         rb.isKinematic = false;
         rb.linearVelocity = direction * speed;
+
+        Debug.Log("data.projectileScale: " + data.projectileScale);
+        // ✅ Set projectile scale explicitly
+        transform.localScale = new Vector3(data.projectileScale, data.projectileScale, data.projectileScale);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -46,8 +51,6 @@ public class Projectile : MonoBehaviour, IProjectile
             return;
         }
 
-        Debug.Log("collision.collider: " + collision.collider);
-        Debug.Log("shooterCollider: " + shooterCollider);
         // ☠️ Self-kill
         if (collision.collider == shooterCollider && Time.time - spawnTime < 0.3f)
         {

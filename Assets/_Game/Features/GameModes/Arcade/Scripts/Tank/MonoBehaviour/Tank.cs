@@ -7,26 +7,27 @@ namespace _Game.Features.GameModes.Test.Scripts.Tank.MonoBehaviour
         [Header("Tank Settings")]
         public float maxHealth = 100f;
         private float currentHealth;
+        private int playerNumber;
 
-        void Start()
+        private GameManager gameManager;
+
+        public void Init(GameManager gm, int playerNum)
         {
+            gameManager = gm;
+            playerNumber = playerNum;
             currentHealth = maxHealth;
         }
 
         public void TakeDamage(float amount)
         {
             currentHealth -= amount;
-            Debug.Log(currentHealth);
+            gameManager.UpdateHealth(playerNumber, Mathf.Max(currentHealth, 0));
+
             if (currentHealth <= 0)
             {
-                DestroyTank();
+                gameManager.OnPlayerDeath(playerNumber);
+                Destroy(gameObject);
             }
-        }
-
-        private void DestroyTank()
-        {
-            Debug.Log("Tank destroyed!");
-            Destroy(gameObject);
         }
     }
 }

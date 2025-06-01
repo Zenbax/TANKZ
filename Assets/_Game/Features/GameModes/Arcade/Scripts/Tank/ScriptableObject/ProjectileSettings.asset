@@ -17,3 +17,4 @@ MonoBehaviour:
   speed: 10
   lifetime: 10
   explosive: 0
+  projectileScale: 0.2
