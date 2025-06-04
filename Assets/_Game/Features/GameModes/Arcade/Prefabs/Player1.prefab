@@ -1666,9 +1666,10 @@ GameObject:
   - component: {fileID: 664068900283036469}
   - component: {fileID: 7625758788669236872}
   - component: {fileID: 3247020654186555931}
+  - component: {fileID: 6911873193802215668}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1757,6 +1758,10 @@ MonoBehaviour:
   horizontalInput: Horizontal1
   speed: 5
   rotationSpeed: 100
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  boxCastSize: {x: 0.4, y: 0.5, z: 0.4}
 --- !u!114 &7625758788669236872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1785,8 +1790,22 @@ MonoBehaviour:
   turretType: 0
   firingPoint: {fileID: 5858238837218441391}
   fireRate: 0.5
+  fireInput: Fire1
   projectileData: {fileID: 11400000, guid: ffafdeb0d6b1b40bfbfdbc9ec216a7e9, type: 2}
   poolSize: 20
+--- !u!114 &6911873193802215668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895380158388111109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6541607395fb455d83cca86d2fdb5e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 1
 --- !u!1 &6947108035880307474
 GameObject:
   m_ObjectHideFlags: 0

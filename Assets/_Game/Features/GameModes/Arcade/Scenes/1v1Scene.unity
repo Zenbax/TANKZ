@@ -2053,7 +2053,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1440, y: 1440}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2136,6 +2136,7 @@ MonoBehaviour:
   cameraController: {fileID: 747698428}
   player1Prefab: {fileID: 6895380158388111109, guid: bcd51c80a70e64fffae332fc5bf8f973, type: 3}
   player2Prefab: {fileID: 3163482894284282669, guid: 56be29f4b3d3840029180c447a383836, type: 3}
+  powerUpManager: {fileID: 282512957}
   player1HealthBar: {fileID: 1568287865}
   player1HealthText: {fileID: 1843917273}
   player2HealthBar: {fileID: 683933463}

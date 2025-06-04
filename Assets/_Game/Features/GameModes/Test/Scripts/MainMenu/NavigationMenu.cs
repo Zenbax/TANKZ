@@ -9,15 +9,15 @@ public class NavigationMenu : MonoBehaviour
 {
     public VisualElement primaryNav;
     public VisualElement secondaryNav;
-    [SerializeField] private SceneAsset testSceneAsset;
-    private string testSceneName;
+    // [SerializeField] private SceneAsset testSceneAsset;
+    // private string testSceneName;
 
     void Start()
     {
-        if (testSceneAsset != null)
-        {
-            testSceneName = testSceneAsset.name;
-        }
+        // if (testSceneAsset != null)
+        // {
+        //     testSceneName = testSceneAsset.name;
+        // }
 
         var root = GetComponent<UIDocument>().rootVisualElement;
         primaryNav = root.Q<VisualElement>("PrimaryNav");
@@ -47,15 +47,15 @@ public class NavigationMenu : MonoBehaviour
             button.RegisterCallback<ClickEvent>(evt => OnSecondaryButtonClick(button));
         }
 
-        var testButton = root.Q<Button>("Btn_TEST");
-        if (testButton != null)
-        {
-            testButton.RegisterCallback<ClickEvent>(evt => OnTestSceneButtonClick());
-        }
-        else
-        {
-            Debug.LogError("Btn_TEST element not found");
-        }
+        // var testButton = root.Q<Button>("Btn_TEST");
+        // if (testButton != null)
+        // {
+        //     testButton.RegisterCallback<ClickEvent>(evt => OnTestSceneButtonClick());
+        // }
+        // else
+        // {
+        //     Debug.LogError("Btn_TEST element not found");
+        // }
     }
 
     void OnPrimaryButtonClick(Button clickedButton)
@@ -96,13 +96,13 @@ public class NavigationMenu : MonoBehaviour
         }
     }
 
-    void OnTestSceneButtonClick()
-    {
-        LoadTestScene();
-    }
-
-    public void LoadTestScene()
-    {
-        SceneManager.LoadScene(testSceneName);
-    }
+    // void OnTestSceneButtonClick()
+    // {
+    //     LoadTestScene();
+    // }
+    //
+    // public void LoadTestScene()
+    // {
+    //     SceneManager.LoadScene(testSceneName);
+    // }
 }
